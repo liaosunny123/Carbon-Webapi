@@ -46,3 +46,6 @@ Parameter:
 - CodeType: The type of the code, just use the same as the website.
 - Code: The code of what you want to use to generate the picture.
 
+# Demo
+
+![Display](.\Static\display.jpg)
