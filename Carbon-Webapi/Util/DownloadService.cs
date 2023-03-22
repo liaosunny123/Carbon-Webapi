@@ -67,6 +67,10 @@ namespace Carbon_Webapi.Util
             stringBuilder.Append($"t={model.Theme}");
             stringBuilder.Append($"&l={MatchCodeType(model.CodeType)}");
             stringBuilder.Append($"&code={PrepareCode(model.Code)}");
+            if ( !string.IsNullOrEmpty(model.Size) ) 
+            {
+                stringBuilder.Append($"es={model.Size}");
+            }
             return stringBuilder.ToString();
         }
 
@@ -78,7 +82,11 @@ namespace Carbon_Webapi.Util
                 "auto" => "auto",
                 "apache" => "text/apache",
                 "c" => "text/x-csrc",
-
+                "bash" => "application/x-sh",
+                "plain text" => "text",
+                "java" => "text/x-java",
+                "go" => "text/x-go",
+                "typescript" => "application/typescript",
                 _ => codeType
             });
 

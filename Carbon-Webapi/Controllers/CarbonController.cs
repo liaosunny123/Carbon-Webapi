@@ -3,13 +3,12 @@ using Carbon_Webapi.Util;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Net.Http.Headers;
-using System.Text.Json.Nodes;
 
 namespace Carbon_Webapi.Controllers
 {
     [ApiController]
     [Route("")]
-    public class CarbonController
+    public class CarbonController : ControllerBase
     {
         private readonly ILogger<CarbonController> _logger;
 
@@ -22,30 +21,19 @@ namespace Carbon_Webapi.Controllers
 
         [HttpPost]
         [Route("CarbonPng")]
-        public HttpResponseMessage GetCarbonPng([FromBody] PngRequest request)
+        public IActionResult GetCarbonPng([FromBody] PngRequest request)
         {
             var path = _downloadService.GetPngPath(request);
-            HttpResponseMessage resp;
             if (path == "")
             {
-                resp = new HttpResponseMessage(HttpStatusCode.OK)
+                return new JsonResult(new
                 {
-                    Content = JsonContent.Create(new
-                    {
-                        Status = "Error",
-                        Message = "Max retry limit, generating process failed."
-                    })
-                };
-                return resp;
+                    Status = "Error",
+                    Message = "Max retries limits, generating process failed."
+                });
             }
-            _logger.LogInformation("PngDownload", "PngDownloadPath=" + path);
-            var imgStream = new MemoryStream(File.ReadAllBytes(path));
-            resp = new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StreamContent(imgStream)
-            };
-            resp.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpg");
-            return resp;
+            _logger.LogInformation("[PngDownload]PngDownloadPath:{path}", path);
+            return PhysicalFile(path, "image/jpg");
         }
     }
 }
