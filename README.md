@@ -48,4 +48,4 @@ Parameter:
 
 # Demo
 
-![Display](.\Static\display.jpg)
+![Display](./Static/display.jpg)
