@@ -45,6 +45,7 @@ Parameter:
 - Theme: The style of the code color
 - CodeType: The type of the code, just use the same as the website.
 - Code: The code of what you want to use to generate the picture.
+- Size: Optional for 1x,2x,4x
 
 # Demo
 
