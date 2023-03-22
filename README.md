@@ -13,7 +13,7 @@ A Webapi that make you can easily get Carbon image.
 EndPoint:/CarbonPng
 JsonBody:
 {
-	"Theme":"seti",
+    "Theme":"seti",
     "CodeType":"c++",
     "Code":"#include <iostream>\nint main()\n{\n}"
 }
